@@ -11,9 +11,24 @@ ROLE_PING = "<@&1503410703879504013>"
 intents = discord.Intents.default()
 client = discord.Client(intents=intents)
 
+test_sent = False
+
 @client.event
 async def on_ready():
+    global test_sent
     print(f"Logged in as {client.user}")
+    
+    if not test_sent:
+        channel = client.get_channel(CHANNEL_ID)
+        if channel:
+            embed = discord.Embed(
+                title="Bot Test Message",
+                description="Bot is online and working! ✅",
+                color=discord.Color.green()
+            )
+            await channel.send(content=ROLE_PING, embed=embed)
+            test_sent = True
+    
     if not daily_reminder.is_running():
         daily_reminder.start()
 
