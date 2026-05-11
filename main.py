@@ -35,7 +35,7 @@ async def on_ready():
 @tasks.loop(minutes=1)
 async def daily_reminder():
     now = datetime.now(ZoneInfo("Europe/Vienna"))
-    if now.hour == 15 and now.minute == 0:
+    if now.hour == 18 and now.minute == 40:
         channel = client.get_channel(CHANNEL_ID)
         if channel:
             embed = discord.Embed(
